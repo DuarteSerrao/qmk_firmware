@@ -14,29 +14,29 @@
 #define HS_RGB_INDICATOR_COUNT              99
 #define HS_RGB_BAT_COUNT                    1
 
-#define MD_BT1_NAME                         "M1 V5"
-#define MD_BT2_NAME                         "M1 V5"
-#define MD_BT3_NAME                         "M1 V5"
-#define MD_DONGLE_PRODUCT                   "M1 V5"
+#define MD_BT1_NAME                         "M1 V5 - DUARTE"
+#define MD_BT2_NAME                         "M1 V5 - DUARTE"
+#define MD_BT3_NAME                         "M1 V5 - DUARTE"
+#define MD_DONGLE_PRODUCT                   "M1 V5 - DUARTE"
 
 /* Device Connection RGB Indicator Light Index And Color */
-#define HS_RGB_BLINK_INDEX_BT1              48
-#define HS_RGB_BLINK_INDEX_BT2              47
-#define HS_RGB_BLINK_INDEX_BT3              46
-#define HS_RGB_BLINK_INDEX_2G4              45
-#define HS_RGB_BLINK_INDEX_USB              44
+#define HS_RGB_BLINK_INDEX_BT1              24
+#define HS_RGB_BLINK_INDEX_BT2              51
+#define HS_RGB_BLINK_INDEX_BT3              52
+#define HS_RGB_BLINK_INDEX_2G4              77
+#define HS_RGB_BLINK_INDEX_USB              79
 
 #define HS_LBACK_COLOR_BT1                  RGB_BLUE
 #define HS_LBACK_COLOR_BT2                  RGB_BLUE
 #define HS_LBACK_COLOR_BT3                  RGB_BLUE
-#define HS_LBACK_COLOR_2G4                  RGB_RED
-#define HS_LBACK_COLOR_USB                  RGB_WHITE
+#define HS_LBACK_COLOR_2G4                  RGB_BLUE
+#define HS_LBACK_COLOR_USB                  RGB_BLUE
 
 #define HS_PAIR_COLOR_BT1                   RGB_BLUE
 #define HS_PAIR_COLOR_BT2                   RGB_BLUE
 #define HS_PAIR_COLOR_BT3                   RGB_BLUE
-#define HS_PAIR_COLOR_2G4                   RGB_RED
-#define HS_PAIR_COLOR_USB                   RGB_WHITE
+#define HS_PAIR_COLOR_2G4                   RGB_BLUE
+#define HS_PAIR_COLOR_USB                   RGB_BLUE
 
 /* Battery */
 #define BATTERY_CAPACITY_LOW                15

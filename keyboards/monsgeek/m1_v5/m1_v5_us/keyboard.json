@@ -222,9 +222,9 @@
         "val_steps": 26,
         "speed_steps": 51,
         "default": {
-            "animation": "cycle_left_right",
+            "animation": "solid_color",
             "val" :104,
-            "speed" :255
+            "hue" : 20
         },
         "sleep": true
     },
