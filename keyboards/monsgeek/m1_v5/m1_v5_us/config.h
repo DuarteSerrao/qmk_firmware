@@ -14,17 +14,17 @@
 #define HS_RGB_INDICATOR_COUNT              99
 #define HS_RGB_BAT_COUNT                    1
 
-#define MD_BT1_NAME                         "M1 V5"
-#define MD_BT2_NAME                         "M1 V5"
-#define MD_BT3_NAME                         "M1 V5"
-#define MD_DONGLE_PRODUCT                   "M1 V5"
+#define MD_BT1_NAME                         "Duarte Cool Keyboard"
+#define MD_BT2_NAME                         "Duarte Cool Keyboard"
+#define MD_BT3_NAME                         "Duarte Cool Keyboard"
+#define MD_DONGLE_PRODUCT                   "Duarte Cool Keyboard"
 
 /* Device Connection RGB Indicator Light Index And Color */
-#define HS_RGB_BLINK_INDEX_BT1              48
-#define HS_RGB_BLINK_INDEX_BT2              47
-#define HS_RGB_BLINK_INDEX_BT3              46
-#define HS_RGB_BLINK_INDEX_2G4              45
-#define HS_RGB_BLINK_INDEX_USB              44
+#define HS_RGB_BLINK_INDEX_BT1              24
+#define HS_RGB_BLINK_INDEX_BT2              51
+#define HS_RGB_BLINK_INDEX_BT3              52
+#define HS_RGB_BLINK_INDEX_2G4              77
+#define HS_RGB_BLINK_INDEX_USB              78
 
 #define HS_LBACK_COLOR_BT1                  RGB_BLUE
 #define HS_LBACK_COLOR_BT2                  RGB_BLUE

@@ -344,6 +344,7 @@ bool process_record_wls(uint16_t keycode, keyrecord_t *record) {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
+
     if (test_white_light_flag && record->event.pressed) {
         test_white_light_flag = false;
         rgb_matrix_set_color_all(0x00, 0x00, 0x00);
@@ -371,6 +372,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case RP_P2:
         case RGB_MOD:
             break;
+        case KC_C:
+            if (record->event.pressed) {
+                if (get_mods() & MOD_MASK_ALT) {
+                    unregister_code(KC_C);
+                    tap_code16(RALT(KC_COMM));
+                    return false;
+                }
+            }
+        break;
         default: {
             if (rgbrec_is_started()) {
                 if (!IS_QK_MOMENTARY(keycode) && record->event.pressed) {
@@ -1105,7 +1115,7 @@ void bat_indicators(void) {
 
     if (charging_state && (bat_full_flag)) {
         battery_process_time = 0;
-    } else if (charging_state) {
+    } else if (charging_state  && layer_state_is(_FL) ) {
 
         battery_process_time = 0;
         rgb_matrix_set_color(HS_MATRIX_BLINK_INDEX_BAT, 0x00, 0xFF, 0x00);
