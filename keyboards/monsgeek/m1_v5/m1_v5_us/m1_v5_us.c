@@ -37,11 +37,20 @@ typedef struct {
 
 enum layers {
     _BL = 0,
+    _GAME,
     _FL,
     _MBL,
     _MFL,
-    _FBL,
 };
+
+enum custom_keycodes {
+    // Applications
+    STEAM = SAFE_RANGE,
+    // Keyboard layers
+    BL_LAYER,
+    GAME_LAYER
+};
+
 
 hs_rgb_indicator_t hs_rgb_indicators[HS_RGB_INDICATOR_COUNT];
 hs_rgb_indicator_t hs_rgb_bat[HS_RGB_BAT_COUNT];
@@ -366,6 +375,26 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             break;
         }
+        case BL_LAYER:
+            if (record->event.pressed) {
+                layer_clear();
+                layer_on(_BL);
+                return false;
+            }
+            break;
+        case GAME_LAYER:
+            if (record->event.pressed) {
+                layer_clear();
+                layer_on(_BL);
+                layer_on(_GAME);
+                return false;
+            }    
+            break;
+        case STEAM:
+            if (record->event.pressed) {
+                SEND_STRING(SS_TAP(X_LGUI) "steam" SS_DELAY(500) SS_TAP(X_ENT));
+            }
+            break;
         case RP_END:
         case RP_P0:
         case RP_P1:

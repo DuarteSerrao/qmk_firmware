@@ -4,6 +4,7 @@
 
 #include "quantum.h"
 #include "wireless.h"
+#include "action_util.h"
 
 #ifndef WLS_INQUIRY_BAT_TIME
 #    define WLS_INQUIRY_BAT_TIME 3000
@@ -216,6 +217,13 @@ void wireless_devs_change(uint8_t old_devs, uint8_t new_devs, bool reset) {
     }
 
     if ((wls_devs != new_devs) || reset) {
+
+        // Release all keys before disconnecting from the current Bluetooth device.
+        if (wls_devs != DEVS_USB && *md_getp_state() == MD_STATE_CONNECTED) {
+            wireless_send_keyboard(NULL);
+            wireless_send_nkro(NULL);
+        }
+
         *md_getp_state()     = MD_STATE_DISCONNECTED;
         *md_getp_indicator() = 0;
     }
@@ -240,9 +248,22 @@ void wireless_post_task(void) {}
 
 void wireless_task(void) {
 
+    static uint8_t last_state = MD_STATE_DISCONNECTED;
+
     wireless_pre_task();
     lpwr_task();
     md_main_task();
+
+    // Resend the current keyboard state after Bluetooth reconnects.
+    uint8_t current_state = *md_getp_state();
+
+    if (current_state == MD_STATE_CONNECTED &&
+        last_state != MD_STATE_CONNECTED) {
+        send_keyboard_report();
+    }
+
+    last_state = current_state;
+
     wireless_post_task();
 
     /* usb_remote_wakeup() should be invoked last so that we have chance
