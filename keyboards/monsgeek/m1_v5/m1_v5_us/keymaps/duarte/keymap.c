@@ -4,6 +4,7 @@
 #include QMK_KEYBOARD_H
 #include "rgb_record/rgb_record.h"
 #include "quantum.h"
+#include "keymap.h"
 
 enum layers {
     _BL = 0,
@@ -18,7 +19,9 @@ enum custom_keycodes {
     STEAM = SAFE_RANGE,
     // Keyboard layers
     BL_LAYER,
-    GAME_LAYER
+    GAME_LAYER,
+    //Misc
+    RGB_RESET_HUE,
 };
 
 
@@ -41,15 +44,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  
         KC_F13,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,            _______,  _______,
         _______,            _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,
-        _______,  KC_F14,  _______,                      _______,                                _______,  _______,  _______,  _______,  _______,  _______),
+        _______,  STEAM,  _______,                      _______,                                _______,  _______,  _______,  _______,  _______,  _______),
     
     [_FL] = LAYOUT( /* Base */
-        QK_BOOT,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  STEAM,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_SLEP,  XXXXXXX,
+        QK_BOOT,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  RGB_RESET_HUE,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_SLEP,  RGB_TOG,
         KC_BT1,   XXXXXXX, EE_CLR,  BT_TEST,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  RGB_SPD,  RGB_SPI,  XXXXXXX,  BL_LAYER,   
         KC_BT2,  XXXXXXX,  HS_DIR,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX, XXXXXXX,   XXXXXXX,  KC_PSCR,  XXXXXXX,  XXXXXXX,  XXXXXXX,  GAME_LAYER,  
-        KC_BT3,  XXXXXXX, XXXXXXX,  XXXXXXX,  XXXXXXX,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  RGB_TOG,  XXXXXXX,  XXXXXXX,            XXXXXXX,  XXXXXXX, 
+        KC_BT3,  XXXXXXX, XXXXXXX,  XXXXXXX,  XXXXXXX,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,            XXXXXXX,  XXXXXXX, 
         KC_2G4,            XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX,  XXXXXXX,
-        KC_USB,   GU_TOGG,  XXXXXXX,                     HS_BATQ,                                XXXXXXX,  XXXXXXX,  HS_CT_A,  XXXXXXX,  XXXXXXX,  XXXXXXX),
+        KC_USB,   GU_TOGG,  XXXXXXX,                     HS_BATQ,                                _______,  XXXXXXX,  HS_CT_A,  XXXXXXX,  XXXXXXX,  XXXXXXX),
 
     [_MBL] = LAYOUT( /* Base */
         KC_ESC,   KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,   KC_F12,   KC_DEL,   KC_MUTE,
@@ -60,10 +63,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_LCTL,  KC_LALT,  KC_LCMD,                      KC_SPC,                                 KC_RCMD,  MO(_MFL), KC_RCTL,  KC_LEFT,  KC_DOWN,  KC_RGHT),
 
     [_MFL] = LAYOUT( /* Base */
-        QK_BOOT,  KC_BRID,  KC_BRIU,  KC_MCTL,  HS_SIRI,  _______,  _______,  KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,  KC_VOLU,  RGB_MOD,  _______,
+        QK_BOOT,  KC_BRID,  KC_BRIU,  KC_MCTL,  HS_SIRI,  _______,  _______,  KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,  KC_VOLU,  RGB_MOD,  RGB_TOG,
         EE_CLR,   _______,  BT_TEST,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  RGB_SPD,  RGB_SPI,  _______,  _______,   
         _______,  _______,  HS_DIR,   KC_BT1,   KC_BT2,   KC_BT3,   KC_2G4,   KC_USB,   KC_INS,   _______,  KC_PSCR,  _______,  _______,  _______,  _______,  
-        _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  RGB_TOG,  _______,  _______,            _______,  _______, 
+        _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,            _______,  _______, 
         _______,            _______,  _______,  KC_CALC,  _______,  _______,  _______,  KC_MUTE,  KC_VOLD,  KC_VOLU,  _______,  _______, RGB_VAI,  _______,
         _______,  _______,  _______,                      HS_BATQ,                                _______,  _______,  HS_CT_A,  RGB_SAI,  RGB_VAD,  RGB_SAD),
     
@@ -100,108 +103,134 @@ const uint16_t PROGMEM rgbrec_default_effects[RGBREC_CHANNEL_NUM][MATRIX_ROWS][M
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     [0] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU)},
     [1] = {ENCODER_CCW_CW(_______, _______)},
-    [2] = {ENCODER_CCW_CW(_______, _______)},
+    [2] = {ENCODER_CCW_CW(RGB_HUD, RGB_HUI)},
     [3] = {ENCODER_CCW_CW(_______, _______)},
     [4] = {ENCODER_CCW_CW(_______, _______)},
 };
 #endif
 
-
-typedef struct {
-    uint8_t r;
-    uint8_t g;
-    uint8_t b;
-} rgb_color_t;
+// ─────────────────────────────────────────────
+// RGB configuration
+// ─────────────────────────────────────────────
 
 
-#define COLOR_ORANGE ((rgb_color_t){255, 80, 0})
-#define COLOR_RED    ((rgb_color_t){255, 0, 0})
-#define COLOR_BLUE    ((rgb_color_t){0, 0, 255})
-#define COLOR_PURPLE  ((rgb_color_t){128, 0, 255})
-#define COLOR_TEAL    ((rgb_color_t){0, 255, 180})
-#define COLOR_GREEN ((rgb_color_t){0, 255, 80})
+#define COLOR_ORANGE ((HSV){.h = 13,  .s = 255, .v = 255})
+#define COLOR_RED    ((HSV){.h = 0,   .s = 255, .v = 255})
+#define COLOR_PURPLE ((HSV){.h = 192, .s = 255, .v = 255})
+#define COLOR_TEAL   ((HSV){.h = 128, .s = 255, .v = 255})
+#define COLOR_GREEN  ((HSV){.h = 85,  .s = 255, .v = 255})
 
-void set_leds_color(const uint8_t *leds, uint8_t count, rgb_color_t color) {
+// Temporary, independent hue offsets
+uint8_t base_hue_offset = 0;
+uint8_t game_hue_offset = 0;
+uint8_t game_accent_hue_offset = 0;
+
+// ─────────────────────────────────────────────
+// LED groups
+// ─────────────────────────────────────────────
+
+static const uint8_t game_accent_leds[] = {
+    49, 53, 54, 55,  // W A S D
+    3, 4, 5, 65      // Arrow keys
+};
+
+static const uint8_t connection_leds[] = {
+    24, 51, 52, 77, 78, // Bluetooth
+    9, 8, 7, 6          // Layers
+};
+
+static const uint8_t application_leds[] = {
+    14, 13, 12, 11
+};
+
+// ─────────────────────────────────────────────
+// RGB helpers
+// ─────────────────────────────────────────────
+
+static RGB hue_shifted_color(HSV color, uint8_t offset) {
+    color.h += offset;
+    return hsv_to_rgb(color);
+}
+
+void set_leds_color(const uint8_t *leds, uint8_t count, HSV color, uint8_t offset) {
+    RGB rgb = hue_shifted_color(color, offset);
+
     for (uint8_t i = 0; i < count; i++) {
-        rgb_matrix_set_color(
-            leds[i],
-            color.r,
-            color.g,
-            color.b
-        );
+        rgb_matrix_set_color(leds[i], rgb.r, rgb.g, rgb.b);
     }
 }
-void set_all_color(rgb_color_t color) {
-    rgb_matrix_set_color_all(
-        color.r,
-        color.g,
-        color.b
-    );
+
+void set_all_color(HSV color, uint8_t offset) {
+    RGB rgb = hue_shifted_color(color, offset);
+    rgb_matrix_set_color_all(rgb.r, rgb.g, rgb.b);
 }
 
-bool key_exists_on_layer(uint8_t layer, uint8_t row, uint8_t col) {
-    uint16_t keycode = pgm_read_word(&keymaps[layer][row][col]);
+// ─────────────────────────────────────────────
+// Hue adjustment
+// ─────────────────────────────────────────────
 
-    return keycode != KC_TRNS;
-}
+void keymap_rgb_hue_adjust(int8_t direction) {
+    int8_t adjustment = direction * RGB_HUE_STEP;
+    uint8_t mods = get_mods() | get_weak_mods() | get_oneshot_mods();
 
-void set_layer_keys_color(uint8_t layer, rgb_color_t color) {
-    for (uint8_t row = 0; row < MATRIX_ROWS; row++) {
-        for (uint8_t col = 0; col < MATRIX_COLS; col++) {
-
-            if (key_exists_on_layer(layer, row, col)) {
-
-                uint8_t led = g_led_config.matrix_co[row][col];
-
-                if (led != NO_LED) {
-                    rgb_matrix_set_color(
-                        led,
-                        color.r,
-                        color.g,
-                        color.b
-                    );
-                }
-            }
+    if (layer_state_is(_GAME)) {
+        if (mods & MOD_MASK_ALT) {
+            // Game + Alt: adjust only the teal accents
+            game_accent_hue_offset += adjustment;
+        } else {
+            // Game without Alt: adjust both colors
+            game_hue_offset += adjustment;
+            game_accent_hue_offset += adjustment;
         }
+    } else {
+        // Base: adjust only the orange background
+        base_hue_offset += adjustment;
     }
 }
+
+// ─────────────────────────────────────────────
+// Keyboard initialization
+// ─────────────────────────────────────────────
 
 void keyboard_post_init_user(void) {
     rgb_matrix_enable();
     rgb_matrix_mode(RGB_MATRIX_SOLID_COLOR);
 }
 
+// ─────────────────────────────────────────────
+// RGB indicators
+// ─────────────────────────────────────────────
+
 bool rgb_matrix_indicators_user(void) {
+    // Base / Game background
     if (layer_state_is(_GAME)) {
-        set_all_color(COLOR_PURPLE);
+        set_all_color(COLOR_PURPLE, game_hue_offset);
 
-        const uint8_t accentLeds[] = {
-            49, 53, 54, 55,  // W A S D
-            3, 4, 5, 65      // Left, Down, Right, Up
-        };
-
-        set_leds_color(accentLeds, sizeof(accentLeds), COLOR_TEAL);
+        set_leds_color(
+            game_accent_leds,
+            sizeof(game_accent_leds),
+            COLOR_TEAL,
+            game_accent_hue_offset
+        );
+    } else {
+        set_all_color(COLOR_ORANGE, base_hue_offset);
     }
-    else {
-        set_all_color(COLOR_ORANGE);
-    }
 
-     // FN layer active
+    // Fixed FN indicators (never hue-shifted)
     if (layer_state_is(_FL)) {
+        set_leds_color(
+            connection_leds,
+            sizeof(connection_leds),
+            COLOR_GREEN,
+            0
+        );
 
-        const uint8_t connectionLeds[] = {
-            24, 51, 52, 77, 78, // Bluetooth
-            9, 8, 7, 6 // Layers
-        };
-
-        set_leds_color(connectionLeds, sizeof(connectionLeds), COLOR_GREEN);
-
-        const uint8_t applicationsLeds[] = {
-            14, 13, 12, 11 // Applications
-        };
-        set_leds_color(applicationsLeds, sizeof(applicationsLeds), COLOR_RED);
-
-
+        set_leds_color(
+            application_leds,
+            sizeof(application_leds),
+            COLOR_RED,
+            0
+        );
     }
 
     return false;

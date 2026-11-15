@@ -4,6 +4,7 @@
 #include QMK_KEYBOARD_H
 #include "wls/wls.h"
 #include "rgb_record/rgb_record.h"
+#include "keymaps/duarte/keymap.h"
 
 #ifdef WIRELESS_ENABLE
 #    include "wireless.h"
@@ -48,7 +49,9 @@ enum custom_keycodes {
     STEAM = SAFE_RANGE,
     // Keyboard layers
     BL_LAYER,
-    GAME_LAYER
+    GAME_LAYER,
+    //Misc
+    RGB_RESET_HUE,
 };
 
 
@@ -276,6 +279,8 @@ uint32_t wls_process_long_press(uint32_t trigger_time, void *cb_arg) {
     return 0;
 }
 
+void keymap_rgb_hue_adjust(int8_t direction);
+
 bool process_record_wls(uint16_t keycode, keyrecord_t *record) {
     static uint16_t keycode_shadow                     = 0x00;
     static deferred_token wls_process_long_press_token = INVALID_DEFERRED_TOKEN;
@@ -363,6 +368,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         hs_rgb_blink_set_timer(timer_read32());
     }
 
+
     switch (keycode) {
         case MO(_FL):
         case MO(_MFL): {
@@ -390,11 +396,33 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 return false;
             }    
             break;
+        case RGB_RESET_HUE :
+            if (record->event.pressed) {
+                if (layer_state_is(_GAME)) {
+                    game_hue_offset = 0;
+                    game_accent_hue_offset = 0;
+                } else {
+                    base_hue_offset = 0;
+                }
+            }    
+            break;
+        
         case STEAM:
             if (record->event.pressed) {
                 SEND_STRING(SS_TAP(X_LGUI) "steam" SS_DELAY(500) SS_TAP(X_ENT));
             }
             break;
+        case RGB_HUD:
+            if (record->event.pressed) {
+                keymap_rgb_hue_adjust(-1);
+            }
+            return false;
+
+        case RGB_HUI:
+            if (record->event.pressed) {
+                keymap_rgb_hue_adjust(1);
+            }
+            return false;
         case RP_END:
         case RP_P0:
         case RP_P1:
